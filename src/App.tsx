@@ -4,14 +4,13 @@ import { downloadSVG } from "./utils/converterUtils";
 import RunicRepresentation from "./components/RunicRepresentation";
 
 const App = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
-  const [number, setNumber] = useState<number>(0);
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const [inputValue, setInputValue] = useState<string>("0");
+  const [numberToConvert, setNumberToConvert] = useState<number>(0);
   const [error, setError] = useState<string>("");
 
   const handleConvert = () => {
-    const value = inputRef.current?.value || "";
-    const numValue = parseInt(value, 10);
+    const numValue = parseInt(inputValue, 10);
 
     if (isNaN(numValue)) {
       setError("Please enter a valid number");
@@ -28,7 +27,7 @@ const App = () => {
       return;
     }
 
-    setNumber(numValue);
+    setNumberToConvert(numValue);
     setError("");
   };
 
@@ -36,6 +35,11 @@ const App = () => {
     if (e.key === "Enter") {
       handleConvert();
     }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    if (error) setError("");
   };
 
   return (
@@ -46,13 +50,12 @@ const App = () => {
         <label htmlFor="number-input">Enter a number (0-9999):</label>
         <div className="input-group">
           <input
-            ref={inputRef}
             id="number-input"
-            type="number"
-            min="0"
-            max="9999"
-            defaultValue="0"
-            onChange={() => setError("")}
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            value={inputValue}
+            onChange={handleInputChange}
             onKeyDown={handleKeyPress}
             className={error ? "error" : ""}
           />
@@ -64,10 +67,10 @@ const App = () => {
       </div>
 
       <div className="svg-section">
-        <RunicRepresentation ref={svgRef} number={number} />
+        <RunicRepresentation ref={svgRef} number={numberToConvert} />
       </div>
       <button
-        onClick={() => downloadSVG(svgRef, number)}
+        onClick={() => downloadSVG(svgRef, numberToConvert)}
         className="download-button"
       >
         Download SVG

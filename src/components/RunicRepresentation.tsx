@@ -6,6 +6,7 @@ interface RunicRepresentationProps {
   ref: React.Ref<SVGSVGElement>;
 }
 
+// as the project is using React 19, we can pass ref as a prop directly, without forwardRef
 const RunicRepresentation = ({ number, ref }: RunicRepresentationProps) => {
   const classes = getRunicClasses(number);
   const paths = getRunicPaths();
