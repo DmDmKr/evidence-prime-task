@@ -2,11 +2,12 @@ import { useState, useRef } from "react";
 import "./App.css";
 import { downloadSVG } from "./utils/converterUtils";
 import RunicRepresentation from "./components/RunicRepresentation";
+import { MAX_NUMBER, MIN_NUMBER } from "./utils/runicNumberUtils";
 
 const App = () => {
-  const svgRef = useRef<SVGSVGElement | null>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const [inputValue, setInputValue] = useState<string>("0");
-  const [numberToConvert, setNumberToConvert] = useState<number>(0);
+  const [numberToConvert, setNumberToConvert] = useState<number>(MIN_NUMBER);
   const [error, setError] = useState<string>("");
 
   const handleConvert = () => {
@@ -17,13 +18,13 @@ const App = () => {
       return;
     }
 
-    if (numValue < 0) {
-      setError("Number must be greater than or equal to 0");
+    if (numValue < MIN_NUMBER) {
+      setError(`Number must be greater than or equal to ${MIN_NUMBER}`);
       return;
     }
 
-    if (numValue > 9999) {
-      setError("Number must be less than or equal to 9999");
+    if (numValue > MAX_NUMBER) {
+      setError(`Number must be less than or equal to ${MAX_NUMBER}`);
       return;
     }
 
@@ -47,7 +48,7 @@ const App = () => {
       <h1>Number to Runes Converter</h1>
 
       <div className="input-section">
-        <label htmlFor="number-input">Enter a number (0-9999):</label>
+        <label htmlFor="number-input">Enter a number (0-{MAX_NUMBER}):</label>
         <div className="input-group">
           <input
             id="number-input"
@@ -59,7 +60,11 @@ const App = () => {
             onKeyDown={handleKeyPress}
             className={error ? "error" : ""}
           />
-          <button onClick={handleConvert} className="convert-button">
+          <button
+            onClick={handleConvert}
+            className="convert-button"
+            disabled={error !== ""}
+          >
             Convert
           </button>
         </div>

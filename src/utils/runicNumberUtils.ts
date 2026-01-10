@@ -7,13 +7,15 @@
  */
 
 const BASE_CLASS = "z0000";
+export const MIN_NUMBER = 0;
+export const MAX_NUMBER = 9999;
 
 export const getRunicClasses = (num: number): string => {
-  if (num < 0 || num > 9999) {
-    throw new Error("Number must be between 0 and 9999");
+  if (num < MIN_NUMBER || num > MAX_NUMBER) {
+    throw new Error(`Number must be between ${MIN_NUMBER} and ${MAX_NUMBER}`);
   }
 
-  if (num === 0) {
+  if (num === MIN_NUMBER) {
     return BASE_CLASS;
   }
 
