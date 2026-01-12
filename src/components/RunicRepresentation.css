@@ -1,0 +1,77 @@
+.runic-svg {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+@media (prefers-color-scheme: light) {
+  .runic-svg {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+.runic-svg path {
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Center vertical line is visible for each number  */
+.runic-svg .centralLine {
+  stroke: currentColor;
+}
+
+/* All lines transparent by default */
+.runic-svg path:not(.centralLine) {
+  stroke: transparent;
+}
+
+/* Ones (1-9) */
+.runic-svg.z1 .c1,
+.runic-svg.z2 .c2,
+.runic-svg.z3 .c3,
+.runic-svg.z4 .c4,
+.runic-svg.z5 .c5,
+.runic-svg.z6 .c6,
+.runic-svg.z7 .c7,
+.runic-svg.z8 .c8,
+.runic-svg.z9 .c9,
+/* Tens (10-90) */
+.runic-svg.z10 .t1,
+.runic-svg.z20 .t2,
+.runic-svg.z30 .t3,
+.runic-svg.z40 .t4,
+.runic-svg.z50 .t5,
+.runic-svg.z60 .t6,
+.runic-svg.z70 .t7,
+.runic-svg.z80 .t8,
+.runic-svg.z90 .t9,
+/* Hundreds (100-900) */
+.runic-svg.z100 .h1,
+.runic-svg.z200 .h2,
+.runic-svg.z300 .h3,
+.runic-svg.z400 .h4,
+.runic-svg.z500 .h5,
+.runic-svg.z600 .h6,
+.runic-svg.z700 .h7,
+.runic-svg.z800 .h8,
+.runic-svg.z900 .h9,
+/* Thousands (1000-9000) */
+.runic-svg.z1000 .d1,
+.runic-svg.z2000 .d2,
+.runic-svg.z3000 .d3,
+.runic-svg.z4000 .d4,
+.runic-svg.z5000 .d5,
+.runic-svg.z6000 .d6,
+.runic-svg.z7000 .d7,
+.runic-svg.z8000 .d8,
+.runic-svg.z9000 .d9 {
+  stroke: currentColor;
+}
+
+.runic-svg:hover {
+  filter: brightness(1.1);
+}
