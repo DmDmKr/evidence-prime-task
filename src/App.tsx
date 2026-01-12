@@ -55,6 +55,7 @@ const App = () => {
             type="text"
             inputMode="numeric"
             pattern="[0-9]*"
+            maxLength={4}
             value={inputValue}
             onChange={handleInputChange}
             onKeyDown={handleKeyPress}

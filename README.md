@@ -62,6 +62,10 @@ src/
 ├── utils/
 │   ├── runicNumberUtils.ts        # Runic number conversion logic
 │   └── converterUtils.ts          # SVG download utilities
+├── tests/
+│   ├── App.test.tsx               # Integration tests
+│   ├── testUtils.ts               # Test utilities (blob reading, etc.)
+│   └── setup.ts                   # Test environment setup
 ├── App.tsx                        # Main application component
 └── App.css                        # Global application styles
 ```
@@ -94,7 +98,7 @@ src/
 - **Component-scoped CSS**: Current implementation uses individual stylesheets per component (`App.css`, `RunicRepresentation.css`) for modularity and maintainability.
 - **Responsive design**: Mobile-first layout using CSS media queries for breakpoints
 - **Dark/light mode support**: Leveraging `prefers-color-scheme` for automatic theme adjustment
-- **Future scalability**: For larger projects, CSS Modules or a UI library (e.g., MUI or Chakra UI) could be adopted to automatically scope styles, ensure consistency, and improve accessibility.
+- **Future scalability**: For larger projects, CSS Modules or a UI library (e.g., MUI) could be adopted to automatically scope styles, ensure consistency, and improve accessibility.
 
 ## Tech Stack
 
@@ -102,6 +106,23 @@ src/
 - **TypeScript** - Type safety and better developer experience
 - **Vite** - Fast build tool and dev server
 - **file-saver** - Client-side file download utility
+
+### Testing Stack
+
+- **Vitest** - Fast, Vite-native test runner
+- **React Testing Library** - Integration testing focused on user behavior and accessibility with realistic user events simulation
+
+### Testing Approach
+
+Following the **Testing Trophy** pattern, the test suite emphasizes integration tests that:
+
+- Test components through user interactions (clicks, typing, keyboard navigation)
+- Use accessibility-first queries (`getByRole`, `getByLabelText`)
+- Verify complete user flows
+
+```bash
+# Run tests in watch mode
+npm run test
 
 ## Implementation Notes
 
@@ -119,3 +140,4 @@ The application implements a positional numeral system where:
 2. Filter visible paths based on computed styles
 3. Apply explicit stroke attributes for consistent rendering
 4. Generate blob and trigger download with descriptive filename
+```
